@@ -1,0 +1,8 @@
+###### Requirements without Version Specifiers ######
+pdfminer
+nltk
+keras
+texthero
+transformers
+sklearn
+PyPDF2

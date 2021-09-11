@@ -1,0 +1,6 @@
+runs/
+venv/
+Results/
+output_crossover/
+Embeddings/
+.idea/

@@ -6,5 +6,6 @@ It involves using word embeddings,text similarity,and character based lstm and g
 
 A extensive set of techniques are used to ensure that the right training data is fed into the model.
 
-Currently work is being done to incorporate transformers(GPT2) instead of LSTM/GRU models and to find the right set of evaluation metrics.
+Uses GPT2 for word level predictions and LSTM/GRU for char level. The entire pipeline can be run using the config file
+present in the Data Files folder.
 

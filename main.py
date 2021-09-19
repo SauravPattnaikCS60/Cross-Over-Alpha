@@ -36,6 +36,7 @@ preprocessed_file_paths = config['preprocessed_file_names']
 similarity_df_name = config['similarity_df_name']
 final_data_name = config['train_data_name']
 TRAIN_WITH_GPT2 = config['TRAIN_WITH_GPT2']
+final_data = None
 
 ############# Initializing ######################
 corpus1 = None
@@ -157,7 +158,7 @@ if TRAIN_WITH_GPT2:
 else:
     formatted_result = str(result)
 
-with open(output_path, 'w') as f:
+with open(output_path, 'w',encoding="utf-8") as f:
     f.writelines(f"Text generation with seed :: {seed}\n\n")
     f.write(formatted_result)
 f.close()

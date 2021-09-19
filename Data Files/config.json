@@ -3,7 +3,7 @@
   "filename2": "hunger_games.pdf",
   "no_of_sentences":1000,
   "similarity_threshold": 0.5,
-  "TRAIN_WITH_GPT2": false,
+  "TRAIN_WITH_GPT2": true,
   "num_train_epochs_value": 2,
   "per_gpu_train_batch_size_value": 2,
   "max_length_words": 500,
@@ -13,8 +13,9 @@
   "max_len_chars": 1500,
   "n_neurons_gru": 256,
   "starting_text": "Edward and Katniss were alone in the dark",
-  "preprocessed_file_names" : "twilight_afterPreprocessing.pkl,hunger_games_afterPreprocessing.pkl",
+  "preprocessed_file_names" : "hunger_games_afterPreprocessing.pkl,twilight_afterPreprocessing.pkl",
   "similarity_df_name" : "twilight_hunger_games_similarity_df.pkl",
   "train_data_name" : "twilight_hunger_games_train_data.pkl",
-  "model_name": "twilight_hunger_games_model_19-09-2021_18-33"
+  "model_name": "",
+  "skip_gpt2_train": true
 }

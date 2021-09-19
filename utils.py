@@ -6,6 +6,11 @@ import keras
 
 
 def save_files(file, filename):
+
+    output_dir = os.path.join(os.getcwd(), 'SavedFiles')
+    if not os.path.exists(output_dir):
+        os.mkdir(output_dir)
+
     output_path = os.path.join(os.getcwd(), 'SavedFiles', str(filename + ".pkl"))
     joblib.dump(file, output_path)
 

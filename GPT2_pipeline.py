@@ -28,17 +28,19 @@ def gpt2_pipeline_function(train_data, config,starting_text=None):
     per_gpu_train_batch_size_value = config['per_gpu_train_batch_size_value']
     max_length_words = config['max_length_words']
     temperature = config['temperature']
+    skip_gpt2_train = config['skip_gpt2_train']
 
-    fine_tune_path = os.path.join(os.getcwd(),'run_lm_finetuning.py')
+    if not skip_gpt2_train:
+        fine_tune_path = os.path.join(os.getcwd(),'run_lm_finetuning.py')
 
-    gpt2_command = f"python {str(fine_tune_path)} " \
-                   f"--output_dir={output_dir_value} --model_type={model_type_value} " \
-                   f"--model_name_or_path={model_name_value} " \
-                   f"--do_train --train_data_file={train_data_file_value} " \
-                   f"--num_train_epochs={num_train_epochs_value} " \
-                   f"--per_gpu_train_batch_size={per_gpu_train_batch_size_value}"
+        gpt2_command = f"python {str(fine_tune_path)} " \
+                       f"--output_dir={output_dir_value} --model_type={model_type_value} " \
+                       f"--model_name_or_path={model_name_value} " \
+                       f"--do_train --train_data_file={train_data_file_value} " \
+                       f"--num_train_epochs={num_train_epochs_value} " \
+                       f"--per_gpu_train_batch_size={per_gpu_train_batch_size_value}"
 
-    subprocess.run(gpt2_command, shell=True)
+        subprocess.run(gpt2_command, shell=True)
 
     # Getting the finetuned model
     model = TFGPT2LMHeadModel.from_pretrained("output_crossover", from_pt=True)

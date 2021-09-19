@@ -9,6 +9,9 @@ import os
 # TODO : training & predicting with GPT2
 def gpt2_pipeline_function(train_data, config,starting_text=None):
     # getting train data to a text format from list
+    if type(train_data) == list:
+        train_data = " ".join(train_data).strip()
+
     train_data = train_data.lower()
     train_data = custom_preprocessing(train_data)
 

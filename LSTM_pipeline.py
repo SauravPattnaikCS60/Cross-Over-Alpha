@@ -1,13 +1,15 @@
+import joblib
 import pandas as pd
 import numpy as np
 from keras.models import Sequential
 from keras.layers import Dense,Dropout,GRU
 import random
 from preprocessing import *
+from utils import *
 
 # TODO : training & predicting with LSTM
 def lstm_pipeline_function(train_data,config,starting_text = None) :
-    
+
     def split_train_data(data, maxlen, step):
     # This function will create the x (sentence) and y (next char) from the data
         sentences = []
@@ -60,6 +62,9 @@ def lstm_pipeline_function(train_data,config,starting_text = None) :
     
     
     # getting train data to a text format from list
+    if type(train_data) == list:
+        train_data = " ".join(train_data).strip()
+
     train_data = train_data.lower() 
     train_data=custom_preprocessing(train_data)
 
@@ -68,13 +73,21 @@ def lstm_pipeline_function(train_data,config,starting_text = None) :
     n_neurons = config['n_neurons_gru']
     output_length = config['max_len_chars']
     temperature = config['temperature']
+    n_epoch = config["num_train_epochs_value"]
+    model_path=config["model_name"]
 
     # splitting the train data
     x, y, len_chars, chars, char_to_index, sentences = split_train_data(train_data, maxlen, step)
-    
-    # building & fitting the model
-    model = build_model(len_chars, maxlen, n_neurons)
-    model.fit(x, y, batch_size=128, epochs=1, validation_split=.2, shuffle=False, verbose=-100)
+
+    if model_path == "":
+        # building & fitting the model
+        model = build_model(len_chars, maxlen, n_neurons)
+        print("epochs = ", n_epoch)
+        model.fit(x, y, batch_size=128, epochs=n_epoch, validation_split=.2, shuffle=False, verbose=-100)
+        # saving the trained model
+        save_lstm(model)
+    else:
+        model = read_lstm(model_path)
 
     # getting the starting text for the prediction
     if starting_text == None :

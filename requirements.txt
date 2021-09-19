@@ -6,3 +6,6 @@ texthero
 transformers
 sklearn
 PyPDF2
+num2words
+tensorflow
+numpy==1.19

@@ -4,7 +4,7 @@
   "no_of_sentences":1000,
   "similarity_threshold": 0.5,
   "TRAIN_WITH_GPT2": true,
-  "num_train_epochs_value": 2,
+  "num_train_epochs_value": 1,
   "per_gpu_train_batch_size_value": 2,
   "max_length_words": 500,
   "temperature": 0.5,

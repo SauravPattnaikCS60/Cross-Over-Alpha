@@ -21,7 +21,7 @@ def read_pickles(filename):
     return file
 
 
-def save_lstm(model):
+def save_gru(model):
     config_filename = 'config.json'
     config = json.load(open(os.path.join(os.getcwd(), 'Data Files', str(config_filename))))
     filename1 = config['filename1'].split(".")[0]
@@ -33,7 +33,7 @@ def save_lstm(model):
     print("Model Saved Successfully")
 
 
-def read_lstm(model_name):
+def read_gru(model_name):
     path = os.path.join(os.getcwd(), 'SavedFiles', str(model_name))
     model = keras.models.load_model(path)
     print("Model Read Successfully")

@@ -7,8 +7,8 @@ import random
 from preprocessing import *
 from utils import *
 
-# TODO : training & predicting with LSTM
-def lstm_pipeline_function(train_data,config,starting_text = None) :
+# TODO : training & predicting with GRU
+def gru_pipeline_function(train_data,config,starting_text = None) :
 
     def split_train_data(data, maxlen, step):
     # This function will create the x (sentence) and y (next char) from the data
@@ -85,9 +85,9 @@ def lstm_pipeline_function(train_data,config,starting_text = None) :
         print("epochs = ", n_epoch)
         model.fit(x, y, batch_size=128, epochs=n_epoch, validation_split=.2, shuffle=False, verbose=-100)
         # saving the trained model
-        save_lstm(model)
+        save_gru(model)
     else:
-        model = read_lstm(model_path)
+        model = read_gru(model_path)
 
     # getting the starting text for the prediction
     if starting_text == None :

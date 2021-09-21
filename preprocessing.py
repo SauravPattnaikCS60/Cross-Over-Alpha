@@ -14,7 +14,7 @@ def custom_preprocessing(text):
     return text
 
 
-def custom_preprocessing_lstm(text):
+def custom_preprocessing_gru(text):
     # convert 1 to one, etc.
     num2words_function = lambda y: num2words(y) if y.isnumeric() else y
     text_list = text.split(" ")

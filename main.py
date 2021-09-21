@@ -17,7 +17,7 @@ from read_data import read_pdfs
 from preprocessing import *
 from similarity_module import similarity_module, list_to_string
 from ner_swaps import create_data_plus_ner_swap
-from LSTM_pipeline import lstm_pipeline_function
+from GRU_pipeline import gru_pipeline_function
 from GPT2_pipeline import gpt2_pipeline_function
 import json
 from utils import *
@@ -37,6 +37,7 @@ similarity_df_name = config['similarity_df_name']
 final_data_name = config['train_data_name']
 TRAIN_WITH_GPT2 = config['TRAIN_WITH_GPT2']
 final_data = None
+result = None
 
 ############# Initializing ######################
 corpus1 = None
@@ -55,8 +56,8 @@ if preprocessed_file_paths == "":
 
     try:
         if TRAIN_WITH_GPT2 == False:
-            corpus1 = pd.Series(corpus1).apply(custom_preprocessing_lstm).tolist()
-            corpus2 = pd.Series(corpus2).apply(custom_preprocessing_lstm).tolist()
+            corpus1 = pd.Series(corpus1).apply(custom_preprocessing_gru).tolist()
+            corpus2 = pd.Series(corpus2).apply(custom_preprocessing_gru).tolist()
         else :
             corpus1 = pd.Series(corpus1).apply(custom_preprocessing).tolist()
             corpus2 = pd.Series(corpus2).apply(custom_preprocessing).tolist()
@@ -126,19 +127,17 @@ else:
 ######### TO DO : TRAINING & SAVING ####################
 
 if TRAIN_WITH_GPT2 == False:
-    # try:
-    trained_model, result, seed = lstm_pipeline_function(final_data, config, starting_text)
-    model_name = "LSTM"
-    print(f'Training with LSTM module ran successfully')
+    try:
+        trained_model, result, seed = gru_pipeline_function(final_data, config, starting_text)
+        print(f'Training with GRU module ran successfully')
 
-    # except Exception as e:
-    #     print(f'{e}: Training with LSTM module failed')
-    #     exit()
+    except Exception as e:
+        print(f'{e}: Training with GRU module failed')
+        exit()
 
 else:
     try:
         trained_model, result, seed = gpt2_pipeline_function(final_data, config, starting_text)
-        model_name = "GPT2"
         print(f'Training with GPT2 module ran successfully')
 
     except Exception as e:

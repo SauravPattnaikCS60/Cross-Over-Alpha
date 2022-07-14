@@ -148,3 +148,6 @@ We have plans to make it open source so that we are quickly able to complete the
 ### License
 MIT License
 
+### Contributors
+[Srishti Verma](https://github.com/srishti387)
+
